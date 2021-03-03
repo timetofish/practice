@@ -57,7 +57,7 @@ Basically, The flow is the same After the configuration turn into JSON format. T
 When using the command
 
 <code><pre>
-#load default JSON file /etc/sonic/       configdb.json
+#load default JSON file /etc/sonic/configdb.json
 config load -y
 
 or 
@@ -221,35 +221,8 @@ In fact, orchagent invokes "sai-redis" layer API.
 
 The code here is difficult to trace. Please check
 
-    sonic-buildimage/src/sonic-sairedis/lib/src/
+    sonic-buildimage/src/sonic-sairedis/lib/src/sai_redis_xxx.cpp
 to see how it works. 
-
-<code><pre>
-#include "sai_redis.h"
-
-REDIS_GENERIC_QUAD(ACL_TABLE,acl_table);
-REDIS_GENERIC_QUAD(ACL_ENTRY,acl_entry);
-REDIS_GENERIC_QUAD(ACL_COUNTER,acl_counter);
-REDIS_GENERIC_QUAD(ACL_RANGE,acl_range);
-REDIS_GENERIC_QUAD(ACL_TABLE_GROUP,acl_table_group);
-REDIS_GENERIC_QUAD(ACL_TABLE_GROUP_MEMBER,acl_table_group_member);
-
-const sai_acl_api_t redis_acl_api = {
-
-    REDIS_GENERIC_QUAD_API(acl_table)
-    REDIS_GENERIC_QUAD_API(acl_entry)
-    REDIS_GENERIC_QUAD_API(acl_counter)
-    REDIS_GENERIC_QUAD_API(acl_range)
-    REDIS_GENERIC_QUAD_API(acl_table_group)
-    REDIS_GENERIC_QUAD_API(acl_table_group_member)
-};
-
-#define REDIS_GENERIC_QUAD_API(ot)     \
-    redis_create_ ## ot,               \
-    redis_remove_ ## ot,               \
-    redis_set_ ## ot ##_attribute,     \
-    redis_get_ ## ot ##_attribute,
-</code></pre>
 
 ***
 
