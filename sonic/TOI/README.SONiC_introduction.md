@@ -54,6 +54,30 @@ configdb.py provides configDBconnector class and ConfigDBPipeConnector class to 
 ### JSON
 Basically, The flow is the same After the configuration turn into JSON format. The most significant difference is JSON file can be a batch of configurations.  
 
+JSON format configuration:
+```
+{
+"ACL_TABLE": {
+        "aaa": {
+                "type": "L3",
+                "ports": "Ethernet0"
+        }
+   },
+"ACL_RULE": {
+        "aaa|rule_0": {
+        "PRIORITY": "55",
+        "PACKET_ACTION": "DROP",
+        "L4_SRC_PORT": "0"
+        },
+        "aaa|rule_1": {
+        "PRIORITY": "55",
+        "PACKET_ACTION": "DROP",
+        "L4_SRC_PORT": "1"
+        }
+   }
+}
+```
+
 When using the command
 
 <code><pre>
