@@ -48,7 +48,7 @@ When user types a command, auto complete engine list the command options which b
 Based on the input parameter, each function integrates key field/value pairs into JSON format. At the end of cli function, get/set API are used to access redis database which were defined in 
 
 
-    sonic-py-swsssdk/src/swsssdk/configdb.py 
+    sonic-py-swsssdk/src/swsssdk/config_db.py 
 
 configdb.py provides configDBconnector class and ConfigDBPipeConnector class to handle database access. 
 ### JSON
