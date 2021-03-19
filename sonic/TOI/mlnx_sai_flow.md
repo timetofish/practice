@@ -106,12 +106,22 @@ if (SAI_STATUS_SUCCESS !=
         return status;
     }
 ```
-   3. Traverse all attributes to get SAI attribute id and value. 
+   3. Traverse all attributes to get SAI attribute id and value.
+
+
 ```
 for (ii = 0; ii < attr_count; ii++) {
         attr_id = attr_list[ii].id;
 ```
+   There is a get_dispatch_attribs_handler to mapping to each get function. 
+
    4. Get attribute value from software database or sdk.
+
+```
+status = functionality_vendor_attr[index].getter(key, &(attr_list[ii].value), ii, &cache,
+                                                         vendor_getter_arg);
+```
+After calling the callback function, attribute will be obtained.
 ```
 static sai_status_t mlnx_trap_type_get(_In_ const sai_object_key_t   *key,
 _Inout_ sai_attribute_value_t *value,
@@ -156,11 +166,13 @@ if (SAI_STATUS_SUCCESS !=
 
 
    3. Get SAI attribute id and value. Transfer SAI parameter to SDK parameter. 
+
+    The set function is not implemented by mlnx, In general case, set_dispatch_attrib_handler will be invoked to mapping the implementation function.
 ```
 N/A
 ```
 
-   4. Update the attribute value of this SAI object to software database.
+   1. Update the attribute value of this SAI object to software database.
 ```
 N/A
 ```
