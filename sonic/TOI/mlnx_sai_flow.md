@@ -19,6 +19,10 @@ const sai_hostif_api_t mlnx_host_interface_api = {
 ```
 at the end of mlnx_sai_host_interface.c
 
+All attributes need us to implement are listed above the function definition in saiintf.h header file.
+
+![attribute list](att_list.png) 
+
 * Create
    
    The most important thing of this operation type is to create a SAI object ID and return to upper layer. 
