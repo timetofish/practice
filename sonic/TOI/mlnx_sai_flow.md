@@ -122,6 +122,46 @@ status = functionality_vendor_attr[index].getter(key, &(attr_list[ii].value), ii
                                                          vendor_getter_arg);
 ```
 After calling the callback function, attribute will be obtained.
+
+```
+static const sai_vendor_attribute_entry_t trap_vendor_attribs[] = {
+    { SAI_HOSTIF_TRAP_ATTR_TRAP_TYPE,
+      { true, false, false, true },
+      { true, false, false, true },
+      mlnx_trap_type_get, NULL,
+      NULL, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_PACKET_ACTION,
+      { true, false, true, true },
+      { true, false, true, true },
+      mlnx_trap_action_get, NULL,
+      mlnx_trap_action_set, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_TRAP_PRIORITY,
+      { true, false, false, false },
+      { true, false, true, true },
+      NULL, NULL,
+      NULL, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_EXCLUDE_PORT_LIST,
+      { true, false, true, false },
+      { true, false, true, false },
+      NULL, NULL,
+      mlnx_trap_exclude_port_list_set, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_TRAP_GROUP,
+      { true, false, true, true },
+      { true, false, true, true },
+      mlnx_trap_group_get, NULL,
+      mlnx_trap_group_set, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_MIRROR_SESSION,
+      { true, false, true, true },
+      { true, false, true, true },
+      mlnx_trap_mirror_session_get, NULL,
+      mlnx_trap_mirror_session_set, NULL },
+    { END_FUNCTIONALITY_ATTRIBS_ID,
+      { false, false, false, false },
+      { false, false, false, false },
+      NULL, NULL,
+      NULL, NULL }
+};
+```
 ```
 static sai_status_t mlnx_trap_type_get(_In_ const sai_object_key_t   *key,
 _Inout_ sai_attribute_value_t *value,
@@ -169,7 +209,43 @@ if (SAI_STATUS_SUCCESS !=
 
     The set function is not implemented by mlnx, In general case, set_dispatch_attrib_handler will be invoked to mapping the implementation function.
 ```
-N/A
+static const sai_vendor_attribute_entry_t trap_vendor_attribs[] = {
+    { SAI_HOSTIF_TRAP_ATTR_TRAP_TYPE,
+      { true, false, false, true },
+      { true, false, false, true },
+      mlnx_trap_type_get, NULL,
+      NULL, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_PACKET_ACTION,
+      { true, false, true, true },
+      { true, false, true, true },
+      mlnx_trap_action_get, NULL,
+      mlnx_trap_action_set, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_TRAP_PRIORITY,
+      { true, false, false, false },
+      { true, false, true, true },
+      NULL, NULL,
+      NULL, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_EXCLUDE_PORT_LIST,
+      { true, false, true, false },
+      { true, false, true, false },
+      NULL, NULL,
+      mlnx_trap_exclude_port_list_set, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_TRAP_GROUP,
+      { true, false, true, true },
+      { true, false, true, true },
+      mlnx_trap_group_get, NULL,
+      mlnx_trap_group_set, NULL },
+    { SAI_HOSTIF_TRAP_ATTR_MIRROR_SESSION,
+      { true, false, true, true },
+      { true, false, true, true },
+      mlnx_trap_mirror_session_get, NULL,
+      mlnx_trap_mirror_session_set, NULL },
+    { END_FUNCTIONALITY_ATTRIBS_ID,
+      { false, false, false, false },
+      { false, false, false, false },
+      NULL, NULL,
+      NULL, NULL }
+};
 ```
 
    1. Update the attribute value of this SAI object to software database.
